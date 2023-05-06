@@ -12,3 +12,5 @@ const postSchema = new mongoose.Schema({
     location: String,
     comments: [commentsSchema]
 })
+
+module.exports = mongoose.model('Post', postSchema);
