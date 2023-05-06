@@ -1,4 +1,3 @@
-const { S3 } = require('aws-sdk');
 const Post = require('../models/post');
 
 module.exports = {
@@ -26,7 +25,7 @@ async function create(req, res) {
     const filePath = `chronicwanderer/posts/${uuidv4()}-${req.file.originalname}`;
     const params = {Bucket: BUCKET_NAME, Key: filePath, Body: req.file.buffer};
 
-    S3.upload(params, async function(err, data) {
+    s3.upload(params, async function(err, data) {
         if(err) {
             console.log(err, 'Either your bucket name is wrong or your keys arent correct');
             res.status(400).json({error: 'Error from aws, check your terminal'})

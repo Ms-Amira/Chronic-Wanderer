@@ -1,8 +1,8 @@
 const User = require('../models/user');
 const Post = require('../models/post')
 const jwt = require('jsonwebtoken');
-const { S3 } = require('aws-sdk');
 const SECRET = process.env.SECRET;
+
 
 module.exports = {
   signup,
@@ -15,16 +15,28 @@ const s3 = new S3();
 const {v4: uuidv4} = require('uuid')
 const BUCKET_NAME = process.env.BUCKET
 
+
 async function signup(req, res) {
-  const user = new User(req.body);
-  try {
-    await user.save();
-    const token = createJWT(user);
-    res.json({ token });
-  } catch (err) {
-    // Probably a duplicate email
-    res.status(400).json(err);
-  }
+  if(!req.file) return res.status(400).json({error: 'Please submit a photo'});
+  const filePath = `chronicwanderer/${uuidv4()}-${req.file.originalname}`;
+  const params = {Bucket: BUCKET_NAME, Key: filePath, Body: req.file.buffer};
+
+  s3.upload(params, async function(err, data) {
+    if(err){
+      console.log(err, 'Either your bucket name is wrong or your keys arent correct');
+      res.status(400).json({error: 'Error from aws, check your terminal'})
+      
+    }
+    const user = new User({...req.body, photoUrl: data.Location});
+    try {
+      await user.save();
+      const token = User.createJWT(user);
+      res.json({token});
+    } catch(err) {
+      res.status(400).json({error: err})
+    }
+
+  })
 }
 
 async function login(req, res) {
@@ -52,7 +64,8 @@ async function profile(req, res) {
     const user = await User.findOne({username: req.params.username})
     if(!user) return res.status(400).json({error: 'User not found'})
 
-    const posts = await Post.find({user: user._id})
+    const posts = await Post.find({user: user._id}).populate('user').exec();
+    res.status(200).json({posts: posts, usesr: user})
   } catch(err) {
     console.log(err)
     res.status(400).json({err})
