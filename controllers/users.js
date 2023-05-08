@@ -30,7 +30,7 @@ async function signup(req, res) {
     const user = new User({...req.body, photoUrl: data.Location});
     try {
       await user.save();
-      const token = User.createJWT(user);
+      const token = createJWT(user);
       res.json({token});
     } catch(err) {
       res.status(400).json({error: err})
@@ -65,7 +65,7 @@ async function profile(req, res) {
     if(!user) return res.status(400).json({error: 'User not found'})
 
     const posts = await Post.find({user: user._id}).populate('user').exec();
-    res.status(200).json({posts: posts, usesr: user})
+    res.status(200).json({posts: posts, user: user})
   } catch(err) {
     console.log(err)
     res.status(400).json({err})

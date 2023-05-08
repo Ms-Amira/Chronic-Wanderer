@@ -1,4 +1,3 @@
-
 import {
     Button,
     Form,
@@ -24,17 +23,19 @@ export default function Signup({handleSignUpOrLogin}) {
         password: '',
         passwordConf: '',
     });
+    
     const [selectImage, setSelectImage] = useState('')
     const [error, setError] = useState('');
 
     function handleChange(c) {
         setSign({
             ...sign,
-            [c.target.name]: e.target.value
+            [c.target.name]: c.target.value
         })
     }
 
     function handlePhoto(p) {
+      console.log(p.target.files)
         setSelectImage(p.target.files[0]);
     }
 
@@ -68,7 +69,7 @@ export default function Signup({handleSignUpOrLogin}) {
         <Header as="h2" color="pink" textAlign="center">
         Sign Up
             </Header>
-            <Form autoComplete="off" onSubmit={handleSubmit} success>
+            <Form autoComplete="off" onSubmit={handleSubmit}>
               <Segment raised>
                 <Form.Input
                   name="username"

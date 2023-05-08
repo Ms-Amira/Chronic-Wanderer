@@ -2,7 +2,8 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 
 import LoginPage from "./pages/LoginPage/LoginPage";
-import SignupPage from './pages/SignupPage/SignupPage'
+import SignupPage from './pages/SignupPage/SignupPage';
+import MainPage from './pages/MainPage/MainPage'
 
 import userService from "./utils/userService";
 import { useState } from "react";
@@ -22,19 +23,22 @@ function handleLogout() {
 if (user) {
   return (
     <Routes>
-      <Route path="/" element={<h1>Home Pageeeeeeeeeee</h1>} />
+    <Route
+      path="/"
+      element={<MainPage loggedInUser={user} handleLogout={handleLogout} />}
+    />
       <Route path="/login" element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />}
       />
        <Route
           path="/signup"
           element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
         />
-        <Route
+        {/* <Route
           path="/:username"
           element={
             <ProfilePage loggedUser={user} handleLogout={handleLogout} />
           }
-        />
+        /> */}
     </Routes>
   );
   }
