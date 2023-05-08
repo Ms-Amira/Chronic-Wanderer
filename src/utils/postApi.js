@@ -1,5 +1,5 @@
 import tokenService from './tokenService';
-const BASE_URL = 'api/posts';
+const BASE_URL = '/api/posts/';
 
 
 export function create(data) {
@@ -10,8 +10,7 @@ export function create(data) {
             Authorization: "Bearer " + tokenService.getToken() 
         }
     }).then(serverResponse => {
-        if(serverResponse.ok) return
-        serverResponse.json()
+        if(serverResponse.ok) return serverResponse.json()
         throw new Error('Something went wrong in create post')
     })
 }

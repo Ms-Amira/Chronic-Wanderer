@@ -25,14 +25,15 @@ export default function AddPostForm({handleAddPost}) {
     return (
 		<Segment>
 			<Form onSubmit={handleSubmit}>
-				<Form.Input 
-					placeholder='Where did you wander to'
+				<Form.TextArea 
+					placeholder='Where did you wander to?'
 					required
+					style={{ minHeight: 100 }}
 					name="body"
 					onChange={handleChange}
 				/>
 				<Form.Input 
-					type='photo'
+					type='file'
 					placeholder="upload image"
 					onChange={handlePhoto}
 				/>

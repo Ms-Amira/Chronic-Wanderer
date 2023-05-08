@@ -1,7 +1,7 @@
 import AddPostForm from '../../components/AddPostForm/AddPostForm'
 import PHeader from '../../components/PHeader/PHeader'
 import CardDisplay from '../../components/CardDisplay/CardDisplay'
-import * as postsApi from '../../utils/postApi';
+import * as postsApi from '../../utils/postApi'
 import * as commentsApi from '../../utils/commentsApi'
 import { Grid } from 'semantic-ui-react';
 import tokenService from '../../utils/tokenService';
@@ -18,6 +18,7 @@ export default function MainPage({loggedInUser, handleLogout}) {
         try {
             setLoading(true);
             const responseData = await postsApi.create(post);
+            console.log(responseData, 'response from server')
             setPosts([responseData.data, ...posts]);
             setLoading(false);
         } catch(err) {
@@ -29,10 +30,10 @@ export default function MainPage({loggedInUser, handleLogout}) {
 
     async function getPosts() {
         try {
-            const response = await postsApi.getAll();
-            console.log(response, 'data');
-            setPosts(response.posts);
-            setLoading(false);
+            const response = await postsApi.getAll()
+            console.log(response, '<----------------')
+            // setPosts(response.posts);
+            // setLoading(false);
         } catch(err) {
             console.log(err.message, 'getPost error');
             setLoading(false);

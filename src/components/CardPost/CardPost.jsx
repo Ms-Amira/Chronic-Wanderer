@@ -9,6 +9,8 @@ function CardPost({ post, isProfile, removeComment, addComment, loggedInUser}) {
         (comment) => comment.username === loggedInUser.username
     );
 
+    // const deleteComment = commentIndex > -1 ? 
+
     return (
         <Card raised>
           {isProfile ? (
