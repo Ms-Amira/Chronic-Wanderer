@@ -32,8 +32,8 @@ export default function MainPage({loggedInUser, handleLogout}) {
         try {
             const response = await postsApi.getAll()
             console.log(response, '<----------------')
-            // setPosts(response.posts);
-            // setLoading(false);
+            setPosts(response.posts);
+            setLoading(false);
         } catch(err) {
             console.log(err.message, 'getPost error');
             setLoading(false);
