@@ -21,7 +21,9 @@ const s3 = new S3();
 const {v4: uuidv4} = require('uuid')
 const BUCKET_NAME = process.env.BUCKET
 
-async function create(req, res) {
+function create(req, res) {
+    console.log(req.body, req.file, req.user)
+
     const filePath = `chronicwanderer/posts/${uuidv4()}-${req.file.originalname}`;
     const params = {Bucket: BUCKET_NAME, Key: filePath, Body: req.file.buffer};
 
@@ -30,9 +32,10 @@ async function create(req, res) {
             console.log(err, 'Either your bucket name is wrong or your keys arent correct');
             res.status(400).json({error: 'Error from aws, check your terminal'})
         }
+        
         try {
             const post = await Post.create({
-                caption: req.body.caption,
+                body: req.body.body,
                 user: req.user,
                 photoUrl: data.Location
             })

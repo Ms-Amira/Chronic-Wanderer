@@ -3,7 +3,8 @@ import "./App.css";
 
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignupPage from './pages/SignupPage/SignupPage';
-import MainPage from './pages/MainPage/MainPage'
+import MainPage from './pages/MainPage/MainPage';
+import UserPage from './pages/UserPage/UserPage';
 
 import userService from "./utils/userService";
 import { useState } from "react";
@@ -33,12 +34,12 @@ if (user) {
           path="/signup"
           element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
         />
-        {/* <Route
+        <Route
           path="/:username"
           element={
-            <ProfilePage loggedUser={user} handleLogout={handleLogout} />
+            <UserPage loggedInUser={user} handleLogout={handleLogout} />
           }
-        /> */}
+        />
     </Routes>
   );
   }

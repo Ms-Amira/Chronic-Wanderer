@@ -21,24 +21,24 @@ export default function CardDisplay({
               </Dimmer>
               <Image src="https://react.semantic-ui.com/images/wireframe/short-paragraph.png" />
             </Segment>
-            {/* <Card.Group itemsPerRow={photoColumn} stackable>
+            <Card.Group itemsPerRow={photoColumn} stackable>
               {posts.map((post) => {
                 return (
-                  <PostCard post={post} key={post._id} isProfile={isProfile} addComment={addComment}
+                  <CardPost post={post} key={post._id} isProfile={isProfile} addComment={addComment}
                   removeComment={removeComment} loggedInUser={loggedInUser}/>
                 );
               })}
-            </Card.Group> */}
+            </Card.Group>
           </>
         );
       }
 
-    //   return (
-    //     <Card.Group itemsPerRow={photoColumn} stackable>
-    //       {posts.map((post) => {
-    //         return  <PostCard post={post} key={post._id} isProfile={isProfile} addComment={addComment}
-    //         removeComment={removeComment} loggedInUser={loggedInUser}/>
-    //       })}
-    //     </Card.Group>
-    //   );
+      return (
+        <Card.Group itemsPerRow={photoColumn} stackable>
+          {posts.map((post) => {
+            return  <CardPost post={post} key={post._id} isProfile={isProfile} addComment={addComment}
+            removeComment={removeComment} loggedInUser={loggedInUser}/>
+          })}
+        </Card.Group>
+      );
 }
