@@ -1,5 +1,6 @@
 import AddPostForm from '../../components/AddPostForm/AddPostForm'
 import PHeader from '../../components/PHeader/PHeader'
+import CardDisplay from '../../components/CardDisplay/CardDisplay'
 import * as postsApi from '../../utils/postApi';
 import * as commentsApi from '../../utils/commentsApi'
 import { Grid } from 'semantic-ui-react';
@@ -25,6 +26,7 @@ export default function MainPage({loggedInUser, handleLogout}) {
             setError('error in creating a post')
         }
     }
+
     async function getPosts() {
         try {
             const response = await postsApi.getAll();
@@ -63,7 +65,7 @@ export default function MainPage({loggedInUser, handleLogout}) {
     if (error) {
         return (
           <>
-            <PHeader loggedUser={loggedInUser} handleLogout={handleLogout} />
+            <PHeader loggedInUser={loggedInUser} handleLogout={handleLogout} />
           </>
         );
       }
@@ -81,15 +83,15 @@ export default function MainPage({loggedInUser, handleLogout}) {
           </Grid.Row>
           <Grid.Row>
           <Grid.Column width={5}>
-              {/* <PostDisplay
+              <CardDisplay
                 posts={posts}
-                numPhotosCol={1}
+                photoColumn={1}
                 isProfile={false}
                 loading={loading}
                 addComment={addComment}
                 removeComment={removeComment}
                 loggedInUser={loggedInUser}
-              /> */}
+              />
             </Grid.Column>
           </Grid.Row>
         </Grid>

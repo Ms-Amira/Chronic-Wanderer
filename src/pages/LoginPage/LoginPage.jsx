@@ -19,6 +19,7 @@ export default function LoginPage(props){
     email: '',
     password: '',
    });
+   
    const [error, setError] = useState('');
 
    const navigate = useNavigate();
