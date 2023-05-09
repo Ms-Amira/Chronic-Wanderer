@@ -6,9 +6,9 @@ function pHeader({loggedInUser, handleLogout}) {
         <Segment clearing>
       <Header as="h2" floated="right">
         <Link to="/">
-          <Icon name="home"></Icon>
+          <Icon name="home" color='pink' />
         </Link>
-        <Link to="" onClick={handleLogout}>
+        <Link to="" onClick={handleLogout} >
           Logout
         </Link>
       </Header>
