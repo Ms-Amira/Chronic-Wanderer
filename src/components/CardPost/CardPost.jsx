@@ -3,30 +3,28 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 
-function CardPost({ post, isProfile, removeComment, addComment, loggedInUser, handleAddPost}) {
+function CardPost({ post, isProfile, removeComment, addComment, loggedInUser, photoColumn}) {
   const [body, setBody] = useState('')
     console.log(loggedInUser)
 
-    const commentIndex = post.comments.findIndex(
-        (comment) => comment.username === loggedInUser.username
-    );
+  //   const commentIndex = post.comments.findIndex(
+  //       (comment) => comment.username === loggedInUser.username
+  //   );
 
-    const deleteComment = commentIndex > -1 ? 
-    [
-      ...post.comments.slice(0, commentIndex),
-      ...post.comments.slice(commentIndex + 1)
-  ] : post.comments;
+  //   const deleteComment = commentIndex > -1 ? 
+  //   [
+  //     ...post.comments.slice(0, commentIndex),
+  //     ...post.comments.slice(commentIndex + 1)
+  // ] : post.comments;
 
   function handleChange(c) {
     setBody(c.target.value)
 }
 
+
   function handleSubmit(s) {
     s.preventDefault();
-
-    const formData = new FormData();
-    formData.append('body', body);
-    handleAddPost(formData);
+    addComment(post._id, body);
 }
 
     return (
@@ -62,9 +60,29 @@ function CardPost({ post, isProfile, removeComment, addComment, loggedInUser, ha
           <Form onSubmit={handleSubmit}>
           <TextArea rows={2} placeholder="What's on your mind?"
           name="body" onChange={handleChange} />
-       <Button deleteComment={deleteComment} type="submit">Add Post</Button>
+       <Button type="submit">Add Comment</Button>
           </Form>
           </Card.Content>
+          <Card.Group itemsPerRow={photoColumn} stackable>
+              {post.comments.map((comment) => {
+                return (
+                  <div className="commentsEl">
+                  <Card.Content comment={comment} key={comment._id} isProfile={isProfile} addComment={addComment}
+                  removeComment={removeComment} 
+                  loggedInUser={loggedInUser}>
+                    {comment.comments}
+                    </Card.Content>
+                    <Card>
+              <Button icon color="red" onClick={() => removeComment(comment._id)}>
+                <Icon name="trash alternate outline"/>
+              </Button>
+                    </Card>
+                      
+                 
+                  </div>
+                );
+              })}
+            </Card.Group>
         </Card>
       );
 

@@ -37,7 +37,8 @@ function create(req, res) {
             const post = await Post.create({
                 body: req.body.body,
                 user: req.user,
-                photoUrl: data.Location
+                photoUrl: data.Location,
+                location: req.body
             })
             await post.populate('user');
             res. status(201).json({data: post})

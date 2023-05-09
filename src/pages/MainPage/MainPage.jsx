@@ -40,9 +40,9 @@ export default function MainPage({loggedInUser, handleLogout}) {
         }
     }
 
-    async function addComment(postId) {
+    async function addComment(postId, comment) {
         try {
-            const data = await commentsApi.create(postId);
+            const data = await commentsApi.create(postId, comment);
             getPosts()
 
         } catch(err) {
@@ -78,12 +78,12 @@ export default function MainPage({loggedInUser, handleLogout}) {
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
-          <Grid.Column width={5}>
+          <Grid.Column style={{ maxWidth: 450 }}>
               <AddPostForm handleAddPost={handleAddPost} />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
-          <Grid.Column width={5}>
+          <Grid.Column style={{ maxWidth: 450 }}>
               <CardDisplay
                 posts={posts}
                 photoColumn={1}

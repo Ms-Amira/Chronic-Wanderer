@@ -9,7 +9,7 @@ async function create(req, res) {
 
     try {
         const post = await Post.findById(req.params.id)
-        post.comment.push({username: req.user.username, comments: req.body});
+        post.comments.push({username: req.user.username, comments: req.body.comment});
         await post.save()
         res.status(201).json({data: 'comment added'})
 
@@ -21,7 +21,9 @@ async function create(req, res) {
 
 async function deleteComment(req, res) {
     try {
-        const post = await Post.findOne({'comments._id': req.params.id, 'comments.username': req.user.username})
+        const post = await Post.findOne({'comments._id': req.params.id, 'comments.username': req.user.
+        username})
+        console.log(post, 'post <--------------')
         post.comments.remove(req.params.id)
         await post.save()
         res.json({data: 'comment removed'})

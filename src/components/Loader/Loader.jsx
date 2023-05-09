@@ -1,11 +1,13 @@
-import { Loader } from 'semantic-ui-react'
+import { Icon } from 'semantic-ui-react'
 
 export default function Loading() {
   return (
  
-        <Loader size="small" active>
-          Loading
-        </Loader>
+    <div>
+    <Icon loading name='spinner' />
+    <Icon loading name='certificate' />
+    <Icon loading name='asterisk' />
+  </div>
 
   );
 }

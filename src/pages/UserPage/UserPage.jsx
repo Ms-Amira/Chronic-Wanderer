@@ -78,7 +78,7 @@ export default function UserPage({loggedInUser, handleLogout}) {
             </Grid.Column>
           </Grid.Row>
           <Grid.Row centered>
-            <Grid.Column width={5}>
+          <Grid.Column style={{ maxWidth: 450 }}>
             <CardDisplay
                 posts={posts}
                 numPhotosCol={3}
