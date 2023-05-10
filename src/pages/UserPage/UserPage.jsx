@@ -3,11 +3,12 @@ import Loader from '../../components/Loader/Loader'
 import CardDisplay from "../../components/CardDisplay/CardDisplay";
 import userService from "../../utils/userService";
 import * as commentsApi from '../../utils/commentsApi'
+import * as postsApi from '../../utils/postApi'
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Grid } from "semantic-ui-react";
 
-export default function UserPage({loggedInUser, handleLogout}) {
+export default function UserPage({loggedInUser, handleLogout, deletePost, removePost}) {
     const [posts, setPosts] = useState([]);
     const [profileUser, setProfileUser] = useState({});
     const [loading, setLoading] = useState(true);
@@ -52,6 +53,15 @@ export default function UserPage({loggedInUser, handleLogout}) {
         }
     }
 
+    async function removePost(postId) {
+      try {
+        const data = await postsApi.deletePost(postId)
+        console.log("Post deleted successfully");
+      } catch (err) {
+        console.error(err, "error in deletion of post:");
+      }
+    }
+
     if (error) {
         return (
           <>
@@ -86,6 +96,7 @@ export default function UserPage({loggedInUser, handleLogout}) {
                 loggedInUser={loggedInUser}
                  addComment={addComment}
                 removeComment={removeComment}
+                deletePost={removePost}
                 />
             </Grid.Column>
           </Grid.Row>

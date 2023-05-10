@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button, Form, Segment} from 'semantic-ui-react'
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
-// import { Loader } from "@googlemaps/js-api-loader"
+// import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+
 
 
 export default function AddPostForm({handleAddPost}) {
@@ -9,6 +9,7 @@ export default function AddPostForm({handleAddPost}) {
     const [selectImage, setSelectImage] = useState('')
 	const [value, setValue] = useState(null);
 	const [location, setLocation] = useState('')
+
 
     function handleChange(c) {
         setBody(c.target.value)
@@ -28,20 +29,6 @@ export default function AddPostForm({handleAddPost}) {
         handleAddPost(formData);
     }
 
-	// const loader = new Loader({
-	// 	apiKey: "AIzaSyAToURi9EBlbQkghR2Qm0lHYu3cVQ2H6Pk",
-	// 	version: "weekly",
-	// 	...additionalOptions,
-	//   });
-	  
-	//   loader.load().then(async () => {
-	// 	const { Map } = await google.maps.importLibrary("maps");
-	  
-	// 	map = new Map(document.getElementById("map"), {
-	// 	  center: { lat: -34.397, lng: 150.644 },
-	// 	  zoom: 8,
-	// 	});
-	//   });
 
 	useEffect(() => {
         if(value){
@@ -59,14 +46,14 @@ export default function AddPostForm({handleAddPost}) {
 					name="body"
 					onChange={handleChange}
 				/>
-				 <GooglePlacesAutocomplete
+				
+				 {/* <GooglePlacesAutocomplete
 						selectProps={{
 						value,
 						onChange: setValue,
 						}}
 						apiKey='AIzaSyAToURi9EBlbQkghR2Qm0lHYu3cVQ2H6Pk'
-					/>
-					<div id="map"></div>
+					/> */}
 
 				<Form.Input 
 					type='file'

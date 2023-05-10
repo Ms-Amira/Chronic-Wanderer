@@ -9,8 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@googlemaps/js-api-loader": "^1.15.1",
-    "@react-google-maps/api": "^2.18.1",
     "aws-sdk": "^2.1373.0",
     "bcrypt": "^5.1.0",
     "dotenv": "^16.0.3",
@@ -23,6 +21,7 @@
     "react-dom": "^18.2.0",
     "react-google-places-autocomplete": "^4.0.1",
     "react-router-dom": "^6.4.3",
+    "react-scripts": "^5.0.1",
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^2.1.4",
     "serve-favicon": "^2.5.0",

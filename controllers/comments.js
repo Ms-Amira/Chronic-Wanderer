@@ -21,7 +21,8 @@ async function create(req, res) {
 
 async function deleteComment(req, res) {
     try {
-        const post = await Post.findOne({'comments._id': req.params.id, 'comments.username': req.user.
+        const post = await Post.findOne({
+        'comments._id': req.params.id, 'comments.username': req.user.
         username})
         console.log(post, 'post <--------------')
         post.comments.remove(req.params.id)

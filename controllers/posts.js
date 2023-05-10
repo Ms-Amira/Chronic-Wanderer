@@ -2,7 +2,8 @@ const Post = require('../models/post');
 
 module.exports = {
     index,
-    create
+    create,
+    deletePost
 }
 
 
@@ -38,7 +39,7 @@ function create(req, res) {
                 body: req.body.body,
                 user: req.user,
                 photoUrl: data.Location,
-                location: req.body
+                location: req.body.location
             })
             await post.populate('user');
             res. status(201).json({data: post})
@@ -46,4 +47,16 @@ function create(req, res) {
             res.status(400).json({error: err})
         }
     })
+}
+
+
+async function deletePost(req, res) {
+    try {
+        console.log(req.user,' <----- req.user')
+const data = await Post.findOneAndDelete({
+    '_id': req.params.id, 'user': req.user._id})
+    res.json({data: 'post removed'})
+} catch(err) {
+        res.status(400).json({error: err})
+    }
 }

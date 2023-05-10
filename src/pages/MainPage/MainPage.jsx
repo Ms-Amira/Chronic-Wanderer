@@ -61,6 +61,17 @@ export default function MainPage({loggedInUser, handleLogout}) {
         }
     }
 
+    async function removePost(postId) {
+      try {
+        const data = await postsApi.deletePost(postId)
+        getPosts()
+        console.log("Post deleted successfully");
+      } catch (error) {
+        console.error(err, "error in deletion of post:");
+      }
+    }
+
+
     useEffect(() => {
         getPosts();
     }, []);
@@ -91,8 +102,10 @@ export default function MainPage({loggedInUser, handleLogout}) {
                 photoColumn={1}
                 isProfile={false}
                 loading={loading}
+                location={location}
                 addComment={addComment}
                 removeComment={removeComment}
+                deletePost={removePost}
                 loggedInUser={loggedInUser}
               />
             </Grid.Column>

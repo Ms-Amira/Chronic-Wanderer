@@ -12,6 +12,7 @@ export default function CardDisplay({
     removeComment,
     loggedInUser,
     photoColumn,
+    deletePost
 }) {
     if (loading) {
         return (
@@ -25,8 +26,15 @@ export default function CardDisplay({
             <Card.Group itemsPerRow={photoColumn} stackable>
               {posts.map((post) => {
                 return (
-                  <CardPost post={post} key={post._id} isProfile={isProfile} addComment={addComment}
-                  removeComment={removeComment} loggedInUser={loggedInUser}/>
+                  <CardPost 
+                  post={post}
+                  key={post._id}
+                  isProfile={isProfile}
+                  addComment={addComment}
+                  removeComment={removeComment}
+                  loggedInUser={loggedInUser}
+                  deletePost={deletePost}
+                  />
                 );
               })}
             </Card.Group>
@@ -37,8 +45,17 @@ export default function CardDisplay({
       return (
         <Card.Group itemsPerRow={photoColumn} stackable>
           {posts.map((post) => {
-            return  <CardPost post={post} key={post._id} isProfile={isProfile} addComment={addComment}
-            removeComment={removeComment} loggedInUser={loggedInUser}/>
+            return (
+            <CardPost
+            post={post}
+            key={post._id}
+            isProfile={isProfile}
+            addComment={addComment}
+            removeComment={removeComment}
+            loggedInUser={loggedInUser}
+            deletePost={deletePost}
+            />
+            )
           })}
         </Card.Group>
       );
