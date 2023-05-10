@@ -9,6 +9,8 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 
+
+
 export default function MainPage({loggedInUser, handleLogout}) {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
