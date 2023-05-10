@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button, Form, Segment} from 'semantic-ui-react'
-// import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
 
 
@@ -47,13 +47,13 @@ export default function AddPostForm({handleAddPost}) {
 					onChange={handleChange}
 				/>
 				
-				 {/* <GooglePlacesAutocomplete
+				 <GooglePlacesAutocomplete
 						selectProps={{
 						value,
 						onChange: setValue,
 						}}
 						apiKey='AIzaSyAToURi9EBlbQkghR2Qm0lHYu3cVQ2H6Pk'
-					/> */}
+					/>
 
 				<Form.Input 
 					type='file'
