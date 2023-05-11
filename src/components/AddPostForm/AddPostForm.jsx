@@ -34,17 +34,10 @@ export default function AddPostForm({handleAddPost}) {
        
         formData.append('photo', selectImage);
 		for (let input in state) {
-            formData.append(input, state[input])
+        formData.append(input, state[input])
         }
         handleAddPost(formData);
-
-//// CLEAR FORM ISSUE
-        setState({
-            body: '',
-            location: '',
-            latitude: '',
-            longitude: '',
-        })
+        s.target.reset();
     }
 
 
@@ -76,11 +69,12 @@ export default function AddPostForm({handleAddPost}) {
 				
 				 <GooglePlacesAutocomplete
 						selectProps={{
-						value,
-						onChange: setValue,
+                            value,
+                            onChange: setValue,
 						}}
 						apiKey='AIzaSyBxWCFRo8mxNv2rP_wmpmH70jE0IdTPf7I'
 						apiOptions={{langauge: 'en'}}
+                        onSubmit={handleSubmit}
 					/>
 
 				<Form.Input 

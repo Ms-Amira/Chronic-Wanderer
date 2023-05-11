@@ -25,13 +25,10 @@ export default function CardPost({ post, isProfile, removeComment, addComment, l
 }
 
 
-// CLEAR FORM ISSUE
   function handleSubmit(s) {
     s.preventDefault();
     addComment(post._id, body);
-    setBody({
-      body: ''
-    })
+    s.target.reset();
 }
 
 function handleDelete() {

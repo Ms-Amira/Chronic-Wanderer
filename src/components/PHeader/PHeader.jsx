@@ -4,7 +4,8 @@ import { Header, Segment, Image, Icon } from "semantic-ui-react";
 function pHeader({loggedInUser, handleLogout}) {
     return (
         <Segment clearing>
-      <Header as="h2" floated="right">
+          <h1 align="center" >Chronic Wanderer</h1>
+      <Header as="h2" floated="right" align="center">
         <Link to="/">
           <Icon name="home" color='pink' />
         </Link>

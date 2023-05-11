@@ -46,6 +46,7 @@ export default function LoginPage(props){
     return (
       <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
        <Grid.Column style={{ maxWidth: 450 }}>
+          <h1>Chronic Wanderer</h1>
           <Image src="https://i.imgur.com/b4Mmgog.jpg" /> 
         <Header as="h2" color="pink" textAlign="center">
         Login to your account
