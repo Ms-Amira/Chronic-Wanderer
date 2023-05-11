@@ -1,4 +1,4 @@
-import { Card, Icon, Image, TextArea, Button, Form } from "semantic-ui-react";
+import { Card, Icon, Image, TextArea, Button, Form, Comment, Checkbox } from "semantic-ui-react";
 import { Link, useNavigate} from "react-router-dom";
 import { useState } from "react";
 import GoogleMapReact from 'google-map-react'
@@ -9,7 +9,7 @@ export default function CardPost({ post, isProfile, removeComment, addComment, l
   const navigate = useNavigate()
   const [body, setBody] = useState('')
   const [showMap, setShowMap] = useState(false)
-
+  const [state, setState] = useState(true)
   const handleLocationClick = async () => {
     setShowMap(!showMap);
   };
@@ -25,16 +25,24 @@ export default function CardPost({ post, isProfile, removeComment, addComment, l
 }
 
 
+// CLEAR FORM ISSUE
   function handleSubmit(s) {
     s.preventDefault();
     addComment(post._id, body);
-    console.log(body, '<---------')
-    setBody('');
+    setBody({
+      body: ''
+    })
 }
 
 function handleDelete() {
   deletePost(post._id);
 }
+
+function handleCheckbox() {
+  setState(!state)
+}
+
+
 
     return (
       <Card raised>
@@ -85,33 +93,41 @@ function handleDelete() {
             navigate('/')
             }}>Delete Card</Button>
         </Card.Content>
+        <Checkbox
+          defaultChecked
+          label='Collapse comments'
+          onChange={handleCheckbox}
+          />
           <Card.Content extra textAlign={"right"}>
-            {post.comments.length} Comments
-          </Card.Content>
+              {post.comments.length} Comments
+            <Comment.Group collapsed={state}>
+              {post.comments.map((comment) => {
+                return (
+           <Comment>
+            <Comment.Content>
+            <Comment.Author>{comment.username}</Comment.Author>
+            <Comment.Text>{comment.comments}
+            </Comment.Text>
+            </Comment.Content>
+              <Button icon color="red" onClick={() => removeComment(comment._id)}>
+                <Icon name="trash alternate outline" />
+              </Button>
+            </Comment>  
+                )
+              })}
+            </Comment.Group>
           <Card.Content> 
           <Form onSubmit={handleSubmit}>
           <TextArea rows={2} placeholder="What's on your mind?"
           name="body" onChange={handleChange} />
-       <Button type="submit">Add Comment</Button>
+          <br/>
+          <br/>
+        <Button content='Add Reply' labelPosition='right' icon='edit' primary />
           </Form>
           </Card.Content>
-          <Card.Group itemsPerRow={photoColumn} stackable>
-              {post.comments.map((comment) => {
-                return (
-                  <div className="commentsEl">
-                    <Card>
-                  <Card.Content
-                  key={comment._id}>
-                    {comment.comments}
-                    </Card.Content>
-              <Button icon color="red" onClick={() => removeComment(comment._id)}>
-                <Icon name="trash alternate outline"/>
-              </Button>
-                    </Card>
-                  </div>
-                );
-              })}
-            </Card.Group>
+          <br/>
+          <br/>
+          </Card.Content>
            
         </Card>
       );

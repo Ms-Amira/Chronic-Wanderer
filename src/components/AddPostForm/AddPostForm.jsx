@@ -37,6 +37,14 @@ export default function AddPostForm({handleAddPost}) {
             formData.append(input, state[input])
         }
         handleAddPost(formData);
+
+//// CLEAR FORM ISSUE
+        setState({
+            body: '',
+            location: '',
+            latitude: '',
+            longitude: '',
+        })
     }
 
 
