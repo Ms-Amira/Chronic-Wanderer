@@ -11,7 +11,7 @@ export default function CardPost({ post, isProfile, removeComment, addComment, l
   const [showMap, setShowMap] = useState(false)
 
   const handleLocationClick = async () => {
-    setShowMap(true);
+    setShowMap(!showMap);
   };
 
   const defaultProps = {center: {
