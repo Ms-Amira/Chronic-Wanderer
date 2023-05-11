@@ -10,6 +10,8 @@ const postSchema = new mongoose.Schema({
     photoUrl: String,
     body: String,
     location: String,
+    latitude: Number,
+    longitude: Number,
     comments: [commentsSchema]
 })
 

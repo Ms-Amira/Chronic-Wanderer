@@ -1,18 +1,26 @@
 import { useState, useEffect } from "react";
 import { Button, Form, Segment} from 'semantic-ui-react'
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import {geocodeByPlaceId, getLatLng} from "react-google-places-autocomplete";
 
 
 
 export default function AddPostForm({handleAddPost}) {
-    const [body, setBody] = useState('')
     const [selectImage, setSelectImage] = useState('')
 	const [value, setValue] = useState(null);
-	const [location, setLocation] = useState('')
+	const [state, setState] = useState({
+        body: '',
+        location: '',
+        latitude: '',
+        longitude: '',
+    });
 
 
     function handleChange(c) {
-        setBody(c.target.value)
+		setState({
+            ...state,
+            [c.target.name]: c.target.value
+			})
     }
 
     function handlePhoto(p) {
@@ -23,17 +31,28 @@ export default function AddPostForm({handleAddPost}) {
         s.preventDefault();
 
         const formData = new FormData();
-        formData.append('body', body);
+       
         formData.append('photo', selectImage);
-		formData.append('location', location)
+		for (let input in state) {
+            formData.append(input, state[input])
+        }
         handleAddPost(formData);
     }
 
 
 	useEffect(() => {
         if(value){
-            setLocation(value.value.description)
-        }
+            geocodeByPlaceId(value.value.place_id)
+            .then(results => getLatLng(results[0]))
+            .then(({ lat, lng }) => {
+      
+            setState({
+                ...state,
+                location: value.value.description,
+                latitude: lat, 
+                longitude: lng
+            })
+        })}
     },[value])
 
     return (
@@ -52,7 +71,8 @@ export default function AddPostForm({handleAddPost}) {
 						value,
 						onChange: setValue,
 						}}
-						apiKey='AIzaSyAToURi9EBlbQkghR2Qm0lHYu3cVQ2H6Pk'
+						apiKey='AIzaSyBxWCFRo8mxNv2rP_wmpmH70jE0IdTPf7I'
+						apiOptions={{langauge: 'en'}}
 					/>
 
 				<Form.Input 

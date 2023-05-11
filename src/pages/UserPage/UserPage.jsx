@@ -34,9 +34,9 @@ export default function UserPage({loggedInUser, handleLogout, deletePost, remove
         }
     }
 
-    async function addComment(postId) {
+    async function addComment(postId, body) {
         try {
-            const data = await commentsApi.create(postId);
+            const data = await commentsApi.create(postId, body);
             getProfile()
 
         } catch(err) {

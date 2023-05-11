@@ -39,7 +39,9 @@ function create(req, res) {
                 body: req.body.body,
                 user: req.user,
                 photoUrl: data.Location,
-                location: req.body.location
+                location: req.body.location,
+                latitude: req.body.latitude,
+                longitude: req.body.longitude
             })
             await post.populate('user');
             res. status(201).json({data: post})
@@ -55,6 +57,7 @@ async function deletePost(req, res) {
         console.log(req.user,' <----- req.user')
 const data = await Post.findOneAndDelete({
     '_id': req.params.id, 'user': req.user._id})
+    await data.save()
     res.json({data: 'post removed'})
 } catch(err) {
         res.status(400).json({error: err})

@@ -1,11 +1,23 @@
 import { Card, Icon, Image, TextArea, Button, Form } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { useState } from "react";
+import GoogleMapReact from 'google-map-react'
 
 
 export default function CardPost({ post, isProfile, removeComment, addComment, loggedInUser, photoColumn, deletePost}) {
+
+  const navigate = useNavigate()
   const [body, setBody] = useState('')
-    console.log(loggedInUser)
+  const [showMap, setShowMap] = useState(false)
+
+  const handleLocationClick = async () => {
+    setShowMap(true);
+  };
+
+  const defaultProps = {center: {
+    lat: post.latitude,
+    lng: post.longitude
+  },zoom:8}
 
 
   function handleChange(c) {
@@ -16,6 +28,8 @@ export default function CardPost({ post, isProfile, removeComment, addComment, l
   function handleSubmit(s) {
     s.preventDefault();
     addComment(post._id, body);
+    console.log(body, '<---------')
+    setBody('');
 }
 
 function handleDelete() {
@@ -42,7 +56,22 @@ function handleDelete() {
                   {post.user.username}
                 </Link>
                   
+                <Card.Header textAlign="right" > <div onClick={handleLocationClick}>{post.location}</div>  </Card.Header>
               </Card.Header>
+              {showMap && (
+        <Card.Content textAlign="center">
+          <div style={{ height: 200, width: "100%" }}>
+            <GoogleMapReact
+              bootstrapURLKeys={{ key: "AIzaSyBxWCFRo8mxNv2rP_wmpmH70jE0IdTPf7I",
+            language: "en" }}
+              defaultCenter={defaultProps.center}
+              defaultZoom={defaultProps.zoom}
+            >
+              <div></div>
+            </GoogleMapReact>
+          </div>
+        </Card.Content>
+      )}
             </Card.Content>
           )}
           <Image src={`${post?.photoUrl}`} wrapped ui={false} />
@@ -51,7 +80,10 @@ function handleDelete() {
           </Card.Content>
        
         <Card.Content>
-          <Button onClick={() => deletePost(post._id)}>Delete Card</Button>
+          <Button onClick={() => {
+            deletePost(post._id)
+            navigate('/')
+            }}>Delete Card</Button>
         </Card.Content>
           <Card.Content extra textAlign={"right"}>
             {post.comments.length} Comments
