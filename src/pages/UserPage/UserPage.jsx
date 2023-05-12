@@ -56,7 +56,8 @@ export default function UserPage({loggedInUser, handleLogout, deletePost, remove
     async function removePost(postId) {
       try {
         const data = await postsApi.deletePost(postId)
-        console.log("Post deleted successfully");
+        getProfile();
+        console.log(data, "Post deleted successfully");
       } catch (err) {
         console.error(err, "error in deletion of post:");
       }
@@ -88,10 +89,10 @@ export default function UserPage({loggedInUser, handleLogout, deletePost, remove
             </Grid.Column>
           </Grid.Row>
           <Grid.Row centered>
-          <Grid.Column style={{ maxWidth: 450 }}>
+          <Grid.Column style={{ maxWidth: 800 }}>
             <CardDisplay
                 posts={posts}
-                numPhotosCol={3}
+                numPhotosCol={2}
                 isProfile={true}
                 loggedInUser={loggedInUser}
                  addComment={addComment}

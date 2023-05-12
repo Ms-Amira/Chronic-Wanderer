@@ -20,7 +20,6 @@ export default function MainPage({loggedInUser, handleLogout}) {
         try {
             setLoading(true);
             const responseData = await postsApi.create(post);
-            console.log(responseData, 'response from server')
             setPosts([responseData.data, ...posts]);
             setLoading(false);
         } catch(err) {
@@ -33,7 +32,6 @@ export default function MainPage({loggedInUser, handleLogout}) {
     async function getPosts() {
         try {
             const response = await postsApi.getAll()
-            console.log(response, '<----------------')
             setPosts(response.posts);
             setLoading(false);
         } catch(err) {
@@ -65,7 +63,7 @@ export default function MainPage({loggedInUser, handleLogout}) {
       try {
         const data = await postsApi.deletePost(postId)
         getPosts()
-        console.log("Post deleted successfully");
+        console.log(data, "Post deleted successfully");
       } catch (error) {
         console.error(err, "error in deletion of post:");
       }
@@ -91,15 +89,15 @@ export default function MainPage({loggedInUser, handleLogout}) {
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
-          <Grid.Column style={{ maxWidth: 450 }}>
+          <Grid.Column style={{ maxWidth: 800 }}>
               <AddPostForm handleAddPost={handleAddPost} />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
-          <Grid.Column style={{ maxWidth: 450 }}>
+          <Grid.Column style={{ maxWidth: 800 }}>
               <CardDisplay
                 posts={posts}
-                photoColumn={1}
+                photoColumn={2}
                 isProfile={false}
                 loading={loading}
                 location={location}

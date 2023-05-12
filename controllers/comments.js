@@ -24,7 +24,6 @@ async function deleteComment(req, res) {
         const post = await Post.findOne({
         'comments._id': req.params.id, 'comments.username': req.user.
         username})
-        console.log(post, 'post <--------------')
         post.comments.remove(req.params.id)
         await post.save()
         res.json({data: 'comment removed'})

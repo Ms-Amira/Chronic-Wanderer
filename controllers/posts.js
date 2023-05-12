@@ -54,10 +54,8 @@ function create(req, res) {
 
 async function deletePost(req, res) {
     try {
-        console.log(req.user,' <----- req.user')
 const data = await Post.findOneAndDelete({
     '_id': req.params.id, 'user': req.user._id})
-    await data.save()
     res.json({data: 'post removed'})
 } catch(err) {
         res.status(400).json({error: err})
