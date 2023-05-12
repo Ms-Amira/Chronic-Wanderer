@@ -10,7 +10,6 @@ module.exports = {
 async function index(req, res) {
     try {
         const posts = await Post.find({}).populate('user').exec()
-        console.log(posts, 'this is the posts <---------------------------')
         res.status(200).json({posts:posts})
     } catch(err) {
         
