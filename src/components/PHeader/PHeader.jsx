@@ -7,7 +7,7 @@ function pHeader({loggedInUser, handleLogout}) {
           <h1 align="center" >Chronic Wanderer</h1>
       <Header as="h2" floated="right" align="center">
         <Link to="/">
-          <Image src="https://i.imgur.com/TNXYgWk.png" />
+          <Image src="https://i.imgur.com/ACFFz8k.png" />
         </Link>
         <Link to="" onClick={handleLogout} >
           Logout
@@ -21,7 +21,7 @@ function pHeader({loggedInUser, handleLogout}) {
                 ? loggedInUser?.photoUrl
                 : "https://react.semantic-ui.com/images/wireframe/square-image.png" 
             }
-            avatar circular
+            avatar circular size='tiny'
           ></Image>
         </Link>
       </Header>

@@ -19,7 +19,7 @@ export default function UserPage({loggedInUser, handleLogout, deletePost, remove
 
     useEffect(() => {
         getProfile();
-    }, []);
+    }, [username]);
 
     async function getProfile() {
         try {
@@ -66,7 +66,7 @@ export default function UserPage({loggedInUser, handleLogout, deletePost, remove
     if (error) {
         return (
           <>
-            <PHeader loggedInUser={user} handleLogout={handleLogout} />
+            <PHeader loggedInUser={loggedInUser} handleLogout={handleLogout} />
             <ErrorMessage error={error} />;
           </>
         );
@@ -95,7 +95,7 @@ export default function UserPage({loggedInUser, handleLogout, deletePost, remove
                 numPhotosCol={2}
                 isProfile={true}
                 loggedInUser={loggedInUser}
-                 addComment={addComment}
+                addComment={addComment}
                 removeComment={removeComment}
                 deletePost={removePost}
                 />

@@ -60,9 +60,8 @@ export default function CardPost({
           <Card.Header>
             <Link to={`/${post.user.username}`}>
               <Image
-                size="large"
                 avatar
-                circular
+                circular size='massive'
                 src={
                   post.user.photoUrl
                     ? post.user.photoUrl
