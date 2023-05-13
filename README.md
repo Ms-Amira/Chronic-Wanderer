@@ -17,7 +17,7 @@ MongoDB, Mongoose, Express, React, Node.js, JavaScript, CSS, HTML
 
 
 ## Next Steps
-![Alt text](https://i.imgur.com/VUN58R2.png)
+![Alt text](https://i.imgur.com/jr60L13.png)
 
 
 ## Deployment Link
