@@ -31,13 +31,13 @@ h1 {
   background-color: transparent;
 }
 
-.ui.image {
+.compass {
 position: relative;
 right: 100px;
 top: 30px;
 }
 
-a {
+.logout {
   position: relative;
   bottom: 30px;
 }

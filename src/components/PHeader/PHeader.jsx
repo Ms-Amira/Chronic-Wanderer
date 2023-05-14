@@ -7,9 +7,9 @@ function pHeader({loggedInUser, handleLogout}) {
           <h1 align="center" >Chronic Wanderer</h1>
       <Header className="header" as="h2" floated="right" align="center">
         <Link to="/">
-          <Image src="https://i.imgur.com/ACFFz8k.png" />
+          <Image src="https://i.imgur.com/ACFFz8k.png" className="compass" />
         </Link>
-        <Link to="" onClick={handleLogout} >
+        <Link to="" onClick={handleLogout} className="logout" >
           Logout
         </Link>
       </Header>
