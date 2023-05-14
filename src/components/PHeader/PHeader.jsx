@@ -5,7 +5,7 @@ function pHeader({loggedInUser, handleLogout}) {
     return (
         <Segment clearing>
           <h1 align="center" >Chronic Wanderer</h1>
-      <Header as="h2" floated="right" align="center">
+      <Header className="header" as="h2" floated="right" align="center">
         <Link to="/">
           <Image src="https://i.imgur.com/ACFFz8k.png" />
         </Link>
@@ -13,7 +13,7 @@ function pHeader({loggedInUser, handleLogout}) {
           Logout
         </Link>
       </Header>
-      <Header as="h2" floated="left">
+      <Header as="h2" floated="left" >
         <Link to={`/${loggedInUser?.username}`}>
           <Image
             src={
