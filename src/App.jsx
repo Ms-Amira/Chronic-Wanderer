@@ -2,46 +2,46 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 
 import LoginPage from "./pages/LoginPage/LoginPage";
-import SignupPage from './pages/SignupPage/SignupPage';
-import MainPage from './pages/MainPage/MainPage';
-import UserPage from './pages/UserPage/UserPage';
+import SignupPage from "./pages/SignupPage/SignupPage";
+import MainPage from "./pages/MainPage/MainPage";
+import UserPage from "./pages/UserPage/UserPage";
 
 import userService from "./utils/userService";
 import { useState } from "react";
 
 function App() {
-  const [user, setUser] = useState(userService.getUser())
+  const [user, setUser] = useState(userService.getUser());
 
-function handleSignUpOrLogin() {
-  setUser(userService.getUser())
-}
+  function handleSignUpOrLogin() {
+    setUser(userService.getUser());
+  }
 
-function handleLogout() {
-  userService.logout();
-  setUser(null);
-}
+  function handleLogout() {
+    userService.logout();
+    setUser(null);
+  }
 
-if (user) {
-  return (
-    <Routes>
-    <Route
-      path="/"
-      element={<MainPage loggedInUser={user} handleLogout={handleLogout} />}
-    />
-      <Route path="/login" element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />}
-      />
-       <Route
+  if (user) {
+    return (
+      <Routes>
+        <Route
+          path="/"
+          element={<MainPage loggedInUser={user} handleLogout={handleLogout} />}
+        />
+        <Route
+          path="/login"
+          element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+        />
+        <Route
           path="/signup"
           element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
         />
         <Route
           path="/:username"
-          element={
-            <UserPage loggedInUser={user} handleLogout={handleLogout} />
-          }
+          element={<UserPage loggedInUser={user} handleLogout={handleLogout} />}
         />
-    </Routes>
-  );
+      </Routes>
+    );
   }
 
   return (
@@ -57,8 +57,6 @@ if (user) {
       <Route path="/*" element={<Navigate to="/login" />} />
     </Routes>
   );
-
 }
-
 
 export default App;

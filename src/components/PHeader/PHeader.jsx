@@ -1,32 +1,34 @@
 import { Link } from "react-router-dom";
 import { Header, Segment, Image, Icon } from "semantic-ui-react";
 
-function pHeader({loggedInUser, handleLogout}) {
-    return (
-        <Segment clearing>
-          <h1 align="center" >Chronic Wanderer</h1>
+function pHeader({ loggedInUser, handleLogout }) {
+  return (
+    <Segment clearing>
+      <h1 align="center">Chronic Wanderer</h1>
       <Header className="header" as="h2" floated="right" align="center">
         <Link to="/">
           <Image src="https://i.imgur.com/ACFFz8k.png" className="compass" />
         </Link>
-        <Link to="" onClick={handleLogout} className="logout" >
+        <Link to="" onClick={handleLogout} className="logout">
           Logout
         </Link>
       </Header>
-      <Header as="h2" floated="left" >
+      <Header as="h2" floated="left">
         <Link to={`/${loggedInUser?.username}`}>
           <Image
             src={
-                loggedInUser?.photoUrl
+              loggedInUser?.photoUrl
                 ? loggedInUser?.photoUrl
-                : "https://react.semantic-ui.com/images/wireframe/square-image.png" 
+                : "https://react.semantic-ui.com/images/wireframe/square-image.png"
             }
-            avatar circular size='tiny'
+            avatar
+            circular
+            size="tiny"
           ></Image>
         </Link>
       </Header>
     </Segment>
-    );
+  );
 }
 
 export default pHeader;

@@ -21,7 +21,6 @@ export default function CardPost({
   photoColumn,
   deletePost,
 }) {
-
   const [body, setBody] = useState("");
   const [showMap, setShowMap] = useState(false);
   const [state, setState] = useState(true);
@@ -61,7 +60,8 @@ export default function CardPost({
             <Link to={`/${post.user.username}`}>
               <Image
                 avatar
-                circular size='massive'
+                circular
+                size="massive"
                 src={
                   post.user.photoUrl
                     ? post.user.photoUrl
@@ -100,14 +100,14 @@ export default function CardPost({
       </Card.Content>
       {isProfile ? (
         <Card.Content>
-        <Button
-          onClick={() => {
-            deletePost(post._id);
-          }}
-        >
-          Delete Card
-        </Button>
-      </Card.Content>
+          <Button
+            onClick={() => {
+              deletePost(post._id);
+            }}
+          >
+            Delete Card
+          </Button>
+        </Card.Content>
       ) : (
         ""
       )}
